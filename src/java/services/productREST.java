@@ -13,6 +13,7 @@ import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -55,4 +56,20 @@ public class productREST {
         return response;
     }
 
+    @PUT
+    @Path("{id}")
+    @Consumes("application/json")
+    public Response set(@PathParam("id") int id, JsonObject json) {
+        Response resp;
+        try {
+            products p = new products(json);
+            productlist.set(id, p);
+            resp = Response.ok(productlist.get(id).toJSON()).build();
+        } catch (Exception ex) {
+            resp = Response.status(500).build();
+        }
+        return resp;
+    }
+
 }
+  
