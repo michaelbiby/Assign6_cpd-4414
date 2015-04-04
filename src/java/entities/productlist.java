@@ -31,7 +31,7 @@ public class productlist {
     public productlist() {
         productlist = new ArrayList<>();
         try (Connection con = getConnection()) {
-            String query = "SELECT * FROM products";
+            String query = "SELECT * FROM PRODUCT";
 
             PreparedStatement pstmt = con.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
@@ -115,8 +115,8 @@ public class productlist {
         Connection con = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            String jdbc = "jdbc:mysql://localhost/";
-            con = (Connection) DriverManager.getConnection(jdbc, "root", "assign6");
+            String jdbc = "jdbc:mysql://localhost/assign6";
+            con = (Connection) DriverManager.getConnection(jdbc, "root", "");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(productlist.class.getName()).log(Level.SEVERE, null, ex);
         }
