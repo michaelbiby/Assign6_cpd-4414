@@ -64,9 +64,10 @@ public class productlist {
         }
         return res;
     }
+
     public void set(int productId, products p) {
         int res = doUpdate(
-                "update PRODUCT SET name = ?, description = ?, quantity = ? where productId = ?",
+                "UPDATE PRODUCT SET name = ?, description = ?, quantity = ? where productId = ?",
                 p.getName(),
                 p.getDescription(),
                 String.valueOf(p.getQuantity()),
@@ -79,7 +80,8 @@ public class productlist {
         }
 
     }
-public void add(products p) throws Exception {
+
+    public void add(products p) throws Exception {
         int res = doUpdate(
                 "INSERT INTO PRODUCT (productId, name, description, quantity) values (?, ?, ?, ?)",
                 String.valueOf(p.getProductId()),
@@ -92,6 +94,7 @@ public void add(products p) throws Exception {
             throw new Exception("Error");
         }
     }
+
     public void remove(products p) throws Exception {
         remove(p.getProductId());
     }
@@ -107,7 +110,8 @@ public void add(products p) throws Exception {
         }
 
     }
-private Connection getConnection() throws SQLException {
+
+    private Connection getConnection() throws SQLException {
         Connection con = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -119,7 +123,7 @@ private Connection getConnection() throws SQLException {
         return con;
     }
 
-private int doUpdate(String query, String... params) {
+    private int doUpdate(String query, String... params) {
         int number_change = 0;
         try (Connection conn = getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -132,12 +136,5 @@ private int doUpdate(String query, String... params) {
         }
         return number_change;
     }
-
-
-
-
-
-
-
 
 }
