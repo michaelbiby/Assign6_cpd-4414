@@ -9,7 +9,11 @@ package services;
 import entities.productlist;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -20,4 +24,19 @@ import javax.ws.rs.Path;
 public class productREST {
     @Inject
     productlist productlist;
+    
+    @GET
+    @Produces("application/json")
+    public Response getAll() {
+        return Response.ok(productlist.toJSON()).build();   
+}
+    
+   @GET
+    @Path("{id}")
+    @Produces("application/json")
+    public Response getById(@PathParam("id") int id) {
+        return Response.ok(productlist.get(id).toJSON()).build();
+    } 
+    
+    
 }
