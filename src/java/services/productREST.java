@@ -11,6 +11,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -71,5 +72,17 @@ public class productREST {
         return resp;
     }
 
+    @DELETE
+    @Path("{id}")
+    public Response delete(@PathParam("id") int id) {
+        Response resp;
+        try {
+            productlist.remove(id);
+            resp = Response.ok("Delete the products with its id" + id).build();
+        } catch (Exception ex) {
+            resp = Response.status(500).build();
+        }
+        return resp;
+
+    }
 }
-  
